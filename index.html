@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plannerly - Планы на день</title>
+  <!-- Подключаем Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #fcfbf7; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8">
+
+  <div class="w-full max-w-4xl flex flex-col md:flex-row gap-8 items-start">
+    
+    <!-- Левая панель: Прогресс + Меню -->
+    <div class="w-full md:w-72 bg-[#1a1a1a] text-white p-6 rounded-3xl shadow-lg flex flex-col justify-between">
+      <div>
+        <h2 class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">Current Progress</h2>
+        <p class="text-xs text-zinc-500 mb-6" id="progressCount">0 из 0 выполнено</p>
+      </div>
+
+      <!-- Прогресс -->
+      <div class="flex flex-col items-center justify-center py-4">
+        <div class="relative w-28 h-28 flex items-center justify-center rounded-full border-4 border-zinc-800">
+          <span id="progressPercent" class="text-3xl font-bold tracking-tight text-white">0%</span>
+        </div>
+        <p class="text-xs text-zinc-400 mt-3 uppercase tracking-widest font-medium">Done!</p>
+      </div>
+
+      <!-- Переключатель вкладок -->
+      <div class="mt-6 space-y-2 text-sm">
+        <button id="tabToday" onclick="switchTab('today')" class="w-full text-left flex items-center gap-3 text-white font-medium bg-zinc-800 px-3 py-2.5 rounded-xl transition cursor-pointer">
+          📅 Сегодня
+        </button>
+        <button id="tabTomorrow" onclick="switchTab('tomorrow')" class="w-full text-left flex items-center gap-3 text-zinc-400 hover:text-white px-3 py-2.5 rounded-xl transition cursor-pointer">
+          🔮 Завтра
+        </button>
+        <button id="tabHistory" onclick="switchTab('history')" class="w-full text-left flex items-center gap-3 text-zinc-400 hover:text-white px-3 py-2.5 rounded-xl transition cursor-pointer">
+          📜 История удаления
+        </button>
+      </div>
+    </div>
+
+    <!-- Правая панель: Задачи -->
+    <div class="flex-1 w-full">
+      
+      <!-- Заголовок -->
+      <div class="mb-6">
+        <h1 class="text-3xl font-extrabold text-zinc-900 tracking-tight" id="mainTitle">Планы на Сегодня</h1>
+        <p class="text-xs font-bold uppercase tracking-wider text-zinc-400 mt-1" id="subTitle">To-Do List</p>
+      </div>
+
+      <!-- Инпут для добавления задач -->
+      <div id="inputBox" class="flex items-center bg-white border border-zinc-200 shadow-sm rounded-full p-1.5 mb-5 focus-within:ring-2 focus-within:ring-emerald-500 transition">
+        <input 
+          type="text" 
+          id="taskInput" 
+          placeholder="Написать новый план..." 
+          class="flex-1 bg-transparent px-4 text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none"
+        >
+        <button 
+          id="addBtn" 
+          onclick="addTask()"
+          class="bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium px-5 py-2.5 rounded-full transition shadow-sm flex items-center gap-1.5 cursor-pointer"
+        >
+          <span>+</span> Добавить
+        </button>
+      </div>
+
+      <!-- Список задач -->
+      <ul id="taskList" class="space-y-3"></ul>
+
+    </div>
+  </div>
+
+  <!-- Подключаем JavaScript отдельным файлом -->
+  <script src="script.js"></script>
+</body>
+</html>
